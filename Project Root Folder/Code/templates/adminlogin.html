@@ -4,33 +4,103 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Product Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .action-link {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+    </style>
 </head>
 <body>
     <h1>Overview</h1>
     <table>
-        <tr>
-        <th>Available Products</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Available Products</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for product in products %}
                 <tr>
                     <td>{{ product.pname }}</td>
                 </tr>
             {% endfor %}
-        <tr>
-        <tr>
-            <td ><a href={{ url_for("product") }}>Product update</a></td>
-        </tr>
-        <th>Current Categories<th>
-        </tr>
-            {% for category in categories %}
+        </tbody>
+        <tfoot>
             <tr>
-                <td>{{ category.cname }}</td>
+                <td class="action-link"><a href="{{ url_for('product') }}">Product Update</a></td>
             </tr>
+        </tfoot>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Current Categories</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.cname }}</td>
+                </tr>
             {% endfor %}
-        <tr>
-            <td ><a href={{ url_for("category") }}>Category updates</a></td>
-        </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="action-link"><a href="{{ url_for('category') }}">Category Updates</a></td>
+            </tr>
+        </tfoot>
     </table>
 </body>
 </html>
