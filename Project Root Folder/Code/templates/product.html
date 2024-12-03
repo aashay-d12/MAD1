@@ -3,55 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1> Product list </h1>
-        {% if products | length == 0 %}
-            <p>No products. Add products now!</p>
-        {% else %}    
-            <table id = "all-products">
-            <tr>
-                <th>SNo</th>
-                <th>Product Name</th>
-                <th>Product Unit Price (INR)</th>
-                <th>Product Count</th>
-                <th>Product Category</th>
-                <th>Actions</th>
-            </tr>
-            {% for product in products %}
+    <h1>Product List</h1>
+    {% if products | length == 0 %}
+        <p>No products available. Add products now!</p>
+    {% else %}
+        <table id="all-products">
+            <thead>
                 <tr>
-                    <td>{{loop.index}}</td>
-                    <td>{{product.pname}}</td>
-                    <td>{{product.pprice}}</td>
-                    <td>{{product.pcount}}</td>
-                    <td>{{categorydict[product.pcid]}}</td>
-                    <td>
-                    <a href="/product/update/{{product.pid}}" type="button">Update</a>
-                    <a href="/product/delete/{{product.pid}}" type="button">Delete</a>
-                    </td>
+                    <th>SNo</th>
+                    <th>Product Name</th>
+                    <th>Price (INR)</th>
+                    <th>Count</th>
+                    <th>Category</th>
+                    <th>Actions</th>
                 </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{product.pname}}</td>
+                        <td>{{product.pprice}}</td>
+                        <td>{{product.pcount}}</td>
+                        <td>{{categorydict[product.pcid]}}</td>
+                        <td>
+                            <a href="/product/update/{{product.pid}}">Update</a>
+                            <a href="/product/delete/{{product.pid}}">Delete</a>
+                        </td>
+                    </tr>
                 {% endfor %}
-            </table>
-        {% endif %}
-        <form method = "post">
-            <p>Add product</p>
-            <input name="pname" placeholder="Product Name" required >
-            <input name="pprice" placeholder="Product Price" required >
-            <input name="pcount" placeholder="Product Count" required >
-            <select name="pcid">
-                {%for category in categories%}
-                <option value={{category.cid}}>{{category.cname}}</option>
-                {%endfor%}
-            </select>
-            <button>Submit</button>
-        </form>
-        <a href={{url_for("category")}}> Create a category for the product</a>
-        {%if was_price_negative%}
-            <div><a>The price cannot be negative</a></div>
-        {%endif%}       
-        {%if was_count_negative%}
-            <div><a>The count cannot be negative</a></div>
-        {%endif%}
+            </tbody>
+        </table>
+    {% endif %}
 </body>
 </html>
