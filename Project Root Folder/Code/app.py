@@ -248,11 +248,11 @@ def product_delete(product_id):
 def sample():
     #Categories
     sample = [Category(cname='Miscellaneous'), Category(cname='Dairy'), Category(cname='Stationary'), 
-              Product(pname='Paneer', pcid=2, pcount=5, pprice= 60), Product(pname='Milk', pcid=2, pcount=2, pprice= 30), 
-              Product(pname='Pen', pcid=3, pcount=6, pprice= 10), Product(pname='Notebook', pcid=3, pcount=5, pprice= 40),
+              Product(pname='Paneer', pcid=2, pcount=15, pprice= 60), Product(pname='Milk', pcid=2, pcount=50, pprice= 30), 
+              Product(pname='Pen', pcid=3, pcount=38, pprice= 10), Product(pname='Notebook', pcid=3, pcount=29, pprice= 40),
               Product(pname='Eraser', pcid=3, pcount=0, pprice= 5),
-              Admin(username='admin', password='1234'), 
-              User(username='nomit', password='1234', fname = 'nomit')]
+              Admin(username='admin1234', password='admin1234'), 
+              User(username='bolt958', password='bolt958', fname = 'nomit')]
 
     for item in sample:
         db.session.add(item)
