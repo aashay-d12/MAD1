@@ -3,37 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Update Product Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            color: #555;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input, select, button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            color: #d9534f;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Update product details</h1>
-    <p>Name: {{product.pname}}, Count: {{product.pcount}}, Category: {{categorydict[product.pcid]}}, Price: {{product.pprice}}</p>        
+    <h1>Update Product Details</h1>
+    <p>Name: {{product.pname}}, Count: {{product.pcount}}, Category: {{categorydict[product.pcid]}}, Price: {{product.pprice}}</p>
     <form method="post">
-        <p>Update details</p>
-        <input name="pname" placeholder="new name"/>            
+        <p>Update Details</p>
+        <input name="pname" placeholder="New name"/>
         <select name="change_count">
             <option value="add">Add more products</option>
             <option value="remove">Remove some products</option>
         </select>
-        <input name="pcount" placeholder="count"/>
+        <input name="pcount" placeholder="Count"/>
         <select name="change_category">
             <option value="none">Select an Option</option>
-            {%for category in categories%}
-            <option value={{category.cid}}>{{category.cname}}</option>
-            {%endfor%}
+            {% for category in categories %}
+            <option value="{{category.cid}}">{{category.cname}}</option>
+            {% endfor %}
         </select>
-        <input name="pprice" placeholder="price"/>
+        <input name="pprice" placeholder="Price"/>
         <button>Submit</button>
     </form>
-    <a href={{url_for("category")}}> Create a category for the product</a>
-    {%if was_price_negative%}
-        <div><a>The price cannot be negative</a></div>
-    {%endif%}       
-    {%if was_count_negative%}
-        <div><a>The count cannot be negative</a></div>
-    {%endif%}
-    {%if is_count_becoming_negative%}
-        <div><a>The count of products in store is becoming negative</a></div>
-    {%endif%}
+    <a href="{{url_for('category')}}">Create a category for the product</a>
+    {% if was_price_negative %}
+        <div class="alert">The price cannot be negative</div>
+    {% endif %}
+    {% if was_count_negative %}
+        <div class="alert">The count cannot be negative</div>
+    {% endif %}
+    {% if is_count_becoming_negative %}
+        <div class="alert">The count of products in store is becoming negative</div>
+    {% endif %}
 </body>
 </html>
