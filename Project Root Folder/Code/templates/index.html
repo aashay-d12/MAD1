@@ -2,21 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <form method="post">            
-        <p>Sign In</p>
-        <input name="username" type="username" placeholder="username" required/>
-        <input name="password" type="password" placeholder="password" required/>
+    <form method="post">
+        <p><strong>Sign In</strong></p>
+        <input name="username" type="text" placeholder="Username" required/>
+        <input name="password" type="password" placeholder="Password" required/>
         <button>Login</button>
         <a href={{url_for('register')}}>Register</a>
-        <a href={{url_for('admin')}}>Admin login</a>
+        <a href={{url_for('admin')}}>Admin Login</a>
+        {%if again%}
+            <p style="color: red;">Incorrect username or password</p>
+        {%endif%}
     </form>
-    {%if again%}
-        <a>Incorrect username or password</a>
-    {%endif%}
 </body>
 </html>
